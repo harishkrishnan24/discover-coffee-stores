@@ -2,13 +2,15 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Banner from '../components/banner';
 import Card from '../components/card';
+import { fetchCoffeeStores } from '../lib/coffee-stores';
 import styles from '../styles/Home.module.css';
-import coffeeStoresData from '../data/coffee-stores.json';
 
 export async function getStaticProps(context) {
+  const coffeeStores = await fetchCoffeeStores();
+
   return {
     props: {
-      coffeeStores: coffeeStoresData, 
+      coffeeStores,
     },
   };
 }
@@ -41,7 +43,7 @@ export default function Home(props) {
                   key={coffeeStore.id}
                   className={styles.card}
                   name={coffeeStore.name}
-                  imgUrl={coffeeStore.imgUrl}
+                  imgUrl={coffeeStore.imgUrl || ''}
                   href={`/coffee-store/${coffeeStore.id}`}
                 />
               ))}
