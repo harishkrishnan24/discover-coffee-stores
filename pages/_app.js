@@ -1,9 +1,12 @@
+import { StoreProvider } from '../store/store-context';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
   return (
     <div>
-      <Component {...pageProps} />
+      <StoreProvider>
+        <Component {...pageProps} />
+      </StoreProvider>
     </div>
   );
 }
